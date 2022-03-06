@@ -1,0 +1,7 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Top Page</h1>
+<h2><a href="{% url 'tasque:task_create' %}">タスクの投稿</a></h2>
+<h2>
+  <a href="{% url 'tasque:task_do' tag_id=1 %}">タスクをこなす</a>
+</h2>
+{% endblock %}
