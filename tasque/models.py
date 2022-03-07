@@ -34,7 +34,7 @@ class Task(models.Model):
         TaskTag, on_delete=models.PROTECT, verbose_name='タグ', default=1)
     due_date = models.DateField(verbose_name='期限', blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
+    finished_at = models.DateTimeField(verbose_name='完了日時')
 
     def __str__(self):
         return self.title

@@ -6,6 +6,7 @@ from django.db.models import F
 from .models import Task, TaskTag
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.utils import timezone
 
 
 class IndexView(TemplateView):
@@ -39,4 +40,14 @@ def taskDeleteView(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     if task:
         task.delete()
+    return redirect('tasque:task_do', task.tag.id)
+
+
+@require_POST
+def taskDoneView(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    if task:
+        task.status = 1
+        task.finished_at = timezone.now()
+        task.save()
     return redirect('tasque:task_do', task.tag.id)
