@@ -41,3 +41,8 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# デフォルトのタグをmigrate時に作成する
+def create_default_tag(sender, **kwargs):
+    TaskTag.objects.get_or_create(name='特になし')
