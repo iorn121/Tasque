@@ -1,42 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task List</title>
-  </head>
-  <body>
-    <h1>タグ</h1>
-    {% for tag in all_tag %}
-    <a href="{% url 'tasque:task_do' tag_id=tag.id %}">
-      <p>{{ tag.name }}</p>
-    </a>
-    {% endfor %}
-    <h1>最新タスク</h1>
-    {% if tasks %}
-    <h2>{{tasks.0.title}}</h2>
-    <h3>{{tasks.0.detail}}</h3>
-    <h3>{{tasks.0.due_date}}</h3>
-    <form method="post" action="{% url 'tasque:task_delete' tasks.0.id %}">
-      {% csrf_token %}
-      <button
-        class="btn"
-        type="submit"
-        name="delete"
-        onclick="return confirm('削除しますか？')"
-        )
-      >
-        削除
-      </button>
-    </form>
-    <form method="post" action="{% url 'tasque:task_done' tasks.0.id %}">
-      {% csrf_token %}
-      <button class="btn" type="submit" name="done">完了</button>
-    </form>
-    {% else %}
-    <p>このタグのTaskはありません</p>
-    {% endif %}
-    <h4><a href="{% url 'tasque:index' %}">戻る</a></h4>
-  </body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<h1>タグ</h1>
+{% for tag in all_tag %}
+<a href="{% url 'tasque:task_do' tag_id=tag.id %}">
+  <p>{{ tag.name }}</p>
+</a>
+{% endfor %}
+<h1>最新タスク</h1>
+{% if tasks %}
+<h2>{{tasks.0.title}}</h2>
+<h3>{{tasks.0.detail}}</h3>
+<h3>{{tasks.0.due_date}}</h3>
+<form method="post" action="{% url 'tasque:task_delete' tasks.0.id %}">
+  {% csrf_token %}
+  <button
+    class="btn"
+    type="submit"
+    name="delete"
+    onclick="return confirm('削除しますか？')"
+    )
+  >
+    削除
+  </button>
+</form>
+<form method="post" action="{% url 'tasque:task_done' tasks.0.id %}">
+  {% csrf_token %}
+  <button class="btn" type="submit" name="done">完了</button>
+</form>
+{% else %}
+<p>このタグのTaskはありません</p>
+{% endif %} {% endblock %}

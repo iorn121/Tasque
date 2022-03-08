@@ -3,6 +3,8 @@ import uuid
 
 
 class TaskTag(models.Model):
+    class Meta:
+        db_table = 'tag'
     name = models.CharField(max_length=100, verbose_name="タグ")
     # sort_order = models.PositiveSmallIntegerField(verbose_name="ソート順")
 
@@ -21,6 +23,7 @@ class TaskStatus(models.IntegerChoices):
 
 class Task(models.Model):
     class Meta:
+        db_table = 'task'
         ordering = ['-created_at']
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -30,7 +33,7 @@ class Task(models.Model):
     status = models.PositiveSmallIntegerField(
         verbose_name="ステータス", choices=TaskStatus.choices, default=0)
     tag = models.ForeignKey(
-        TaskTag, on_delete=models.PROTECT, verbose_name='タグ', default=1)
+        TaskTag, verbose_name='タグ', default=1, on_delete=models.SET_DEFAULT)
     due_date = models.DateField(verbose_name='期限', blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     finished_at = models.DateTimeField(
