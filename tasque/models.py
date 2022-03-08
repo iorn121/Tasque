@@ -4,8 +4,7 @@ import uuid
 
 class TaskTag(models.Model):
     name = models.CharField(max_length=100, verbose_name="タグ")
-    sort_order = models.PositiveSmallIntegerField(
-        verbose_name="ソート順")
+    # sort_order = models.PositiveSmallIntegerField(verbose_name="ソート順")
 
     def __int__(self):
         return self.id
@@ -34,7 +33,8 @@ class Task(models.Model):
         TaskTag, on_delete=models.PROTECT, verbose_name='タグ', default=1)
     due_date = models.DateField(verbose_name='期限', blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
-    finished_at = models.DateTimeField(verbose_name='完了日時')
+    finished_at = models.DateTimeField(
+        verbose_name='完了日時', blank=True, null=True)
 
     def __str__(self):
         return self.title
