@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DeleteView, DetailView
-from .forms import TaskForm
+from .forms import TaskForm, TagForm
 from django.db.models import F
 from .models import Task, TaskTag
 from django.shortcuts import render, get_object_or_404
@@ -19,8 +19,18 @@ class TaskCreateView(CreateView):
     success_url = reverse_lazy('tasque:task_create_complete')
 
 
+class TagCreateView(CreateView):
+    template_name = 'tag_create.html'
+    form_class = TagForm
+    success_url = reverse_lazy('tasque:tag_create_complete')
+
+
 class TaskCreateCompleteView(TemplateView):
     template_name = 'task_create_complete.html'
+
+
+class TagCreateCompleteView(TemplateView):
+    template_name = 'tag_create_complete.html'
 
 
 def taskDoView(request, tag_id):
