@@ -11,4 +11,7 @@ urlpatterns = [
     path('task/delete/<uuid:task_id>',
          views.taskDeleteView, name='task_delete'),
     path('task/done/<uuid:task_id>', views.taskDoneView, name='task_done'),
+    path('tag/create/', views.TagCreateView.as_view(), name='tag_create'),
+    path('tag/create/complete/', views.TagCreateCompleteView.as_view(),
+         name='tag_create_complete'),
 ]
