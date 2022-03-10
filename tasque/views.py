@@ -41,6 +41,7 @@ def taskDoView(request, tag_id):
     qs = Task.objects.filter(tag=tg, status=0).order_by(
         F('due_date').asc(nulls_last=True))
     todolist['all_tag'] = all_tag
+    todolist['now_tag'] = tg
     todolist['tasks'] = qs
     return render(request, template_name, todolist)
 
