@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+  {% load static %} {% bootstrap_css %}
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tasque</title>
   </head>
-  <body>
+  <body class="bg-light">
     {% block content %}{% endblock %}
     <h4><a href="{% url 'tasque:index' %}">TOP</a></h4>
   </body>

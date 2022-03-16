@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <h1>Tag Create Page</h1>
 <form method="post">
-  {% csrf_token %} {{form.as_p}}
+  {% csrf_token %} {{form.as_p | add_class:'form-control col-10 bg-primary'}}
   <button type="submit">投稿</button>
 </form>
 {% endblock %}
