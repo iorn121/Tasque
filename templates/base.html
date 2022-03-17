@@ -6,9 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tasque</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
   </head>
   <body class="bg-light">
+    <h1 class="text-center text-b font-title text-uppercase">Tasque</h1>
+
     {% block content %}{% endblock %}
-    <h4><a href="{% url 'tasque:index' %}">TOP</a></h4>
+    <h4 class="mt-8 text-center">
+      <a href="{% url 'tasque:index' %}" class="text-b font-title">TOP</a>
+    </h4>
   </body>
 </html>

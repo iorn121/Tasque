@@ -1,8 +1,20 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Top Page</h1>
-<h2><a href="{% url 'tasque:tag_create' %}">タグの作成</a></h2>
-<h2><a href="{% url 'tasque:task_create' %}">タスクの作成</a></h2>
-<h2>
-  <a href="{% url 'tasque:task_do' tag_id=1 %}">タスクをこなす</a>
-</h2>
+<div class="container">
+  <h2 class="leftcolor-green mt-5">
+    <a href="{% url 'tasque:tag_create' %}" class="text-d font-title"
+      >タグの作成</a
+    >
+  </h2>
+  <p></p>
+  <h2 class="leftcolor-green mt-5">
+    <a href="{% url 'tasque:task_create' %}" class="text-d font-title"
+      >タスクの作成</a
+    >
+  </h2>
+  <h2 class="leftcolor-green mt-5">
+    <a href="{% url 'tasque:task_do' tag_id=1 %}" class="text-d font-title"
+      >タスクをこなす</a
+    >
+  </h2>
+</div>
 {% endblock %}
