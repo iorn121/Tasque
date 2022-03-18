@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグ一覧</h2>
+  <ul class="list-group">
+    {% for tag in tag_list %}
+    <li
+      class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2"
+    >
+      <h5 class="text-jade col-10 m-0">{{tag}}</h5>
+      {% if not forloop.first %}
+      <form method="post" action="{% url 'tasque:tag_delete' tag.id %}">
+        {% csrf_token %}
+      <button type="submit" class="btn btn-danger">削除</button>
+      </form>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  <h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグ登録</h2>
+  <form method="post" action="{% url 'tasque:tag_create' %}" class="m-1 p^2">
+  {% csrf_token %}
+  <input class="form-control" type="text" name="tag_name" placeholder="登録するタグを入力"></input>
+  <button type="submit" class="btn btn-secondary d-block mt-3 mx-auto">
+    追加
+  </button>
+</form>
+</div>
+
+{% endblock %}

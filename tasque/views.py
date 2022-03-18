@@ -19,10 +19,12 @@ class TaskCreateView(CreateView):
     success_url = reverse_lazy('tasque:task_create_complete')
 
 
-class TagCreateView(CreateView):
-    template_name = 'tag_create.html'
-    form_class = TagForm
-    success_url = reverse_lazy('tasque:tag_create_complete')
+def TagListView(request):
+    template_name = 'tag_list.html'
+    tag_list = {}
+    qs = TaskTag.objects.all()
+    tag_list['tag_list'] = qs
+    return render(request, template_name, tag_list)
 
 
 class TaskCreateCompleteView(TemplateView):
@@ -44,6 +46,22 @@ def taskDoView(request, tag_id):
     todolist['now_tag'] = tg
     todolist['tasks'] = qs
     return render(request, template_name, todolist)
+
+
+@require_POST
+def tagCreateView(request):
+    tag_name = request.POST['tag_name']
+    if tag_name:
+        TaskTag.objects.create(name=tag_name)
+    return redirect('tasque:tag_list')
+
+
+@require_POST
+def tagDeleteView(request, tag_id):
+    tag = get_object_or_404(TaskTag, id=tag_id)
+    if tag:
+        tag.delete()
+    return redirect('tasque:tag_list')
 
 
 @require_POST

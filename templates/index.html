@@ -1,13 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
   <h2 class="leftcolor-green mt-5 mb-3">
-    <a href="{% url 'tasque:tag_create' %}" class="text-b font-title"
-      >タグの作成</a
+    <a href="{% url 'tasque:tag_list' %}" class="text-b font-title"
+      >タグの設定</a
     >
   </h2>
-  <p class="text-d">
-    タスクごとに設定するタグを作成します<br />タグごとにタスクを並び替えます
-  </p>
+  <p class="text-d">タスクを整理するためのタグを追加・削除します<br /></p>
   <h2 class="leftcolor-green mt-5">
     <a href="{% url 'tasque:task_create' %}" class="text-b font-title"
       >タスクの作成</a
