@@ -7,7 +7,7 @@
     <li
       class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2"
     >
-      <h5 class="text-jade col-10 m-0">{{tag}}</h5>
+      <h5 class="text-jade col-8 m-0">{{tag}}</h5>
       {% if not forloop.first %}
       <form method="post" action="{% url 'tasque:tag_delete' tag.id %}">
         {% csrf_token %}
