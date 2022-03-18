@@ -1,22 +1,22 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
-  <h2 class="leftcolor-green mt-5 mb-3">
-    <a href="{% url 'tasque:tag_list' %}" class="text-b font-title"
-      >タグの設定</a
-    >
-  </h2>
-  <p class="text-d">タスクを整理するためのタグを追加・削除します<br /></p>
-  <h2 class="leftcolor-green mt-5">
-    <a href="{% url 'tasque:task_create' %}" class="text-b font-title"
-      >タスクの作成</a
-    >
-  </h2>
-  <p class="text-d">タスクを作成します</p>
-  <h2 class="leftcolor-green mt-5">
-    <a href="{% url 'tasque:task_do' tag_id=1 %}" class="text-b font-title"
-      >タスクをこなす</a
-    >
-  </h2>
-  <p class="text-d">タスクを一件ずつこなします</p>
-</div>
+
+<h2 class="leftcolor-green mt-5 mb-3">
+  <a href="{% url 'tasque:tag_list' %}" class="text-b font-title">タグの設定</a>
+</h2>
+<p class="text-d">タスクを整理するためのタグを追加・削除します</p>
+<h2 class="leftcolor-green mt-5 mb-3">
+  <a href="{% url 'tasque:task_create' %}" class="text-b font-title"
+    >タスク作成</a
+  >
+</h2>
+<p class="text-d">
+  新たにタスクを作成します<br />締切やタグを設定することでタスクの優先度を上げることができます
+</p>
+<h2 class="leftcolor-green mt-5 mb-3">
+  <a href="{% url 'tasque:task_do' tag_id=1 %}" class="text-b font-title"
+    >タスク実行</a
+  >
+</h2>
+<p class="text-d">タスクを一件ずつこなします</p>
+
 {% endblock %}

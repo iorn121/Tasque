@@ -17,12 +17,33 @@
         Tasque
       </a>
     </h1>
+    <div class="container">
+      <div class="border-bottom"></div>
+      {% block content %}{% endblock %}
+      <div class="border-bottom mt-5"></div>
+    </div>
 
-    {% block content %}{% endblock %}
     <h4 class="mt-5 text-center">
       <a href="{% url 'tasque:index' %}" class="text-secondary font-title"
         >TOP</a
       >
     </h4>
+    <h5 class="mt-1 text-center">
+      <a href="{% url 'tasque:tag_list' %}" class="text-secondary font-title"
+        >タグの設定</a
+      >
+    </h5>
+    <h5 class="mt-1 text-center">
+      <a href="{% url 'tasque:task_create' %}" class="text-secondary font-title"
+        >タスク作成</a
+      >
+    </h5>
+    <h5 class="mt-1 text-center">
+      <a
+        href="{% url 'tasque:task_do' tag_id=1  %}"
+        class="text-secondary font-title"
+        >タスク実行</a
+      >
+    </h5>
   </body>
 </html>
