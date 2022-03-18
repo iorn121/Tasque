@@ -9,9 +9,9 @@
     >
       <h5 class="text-jade col-8 m-0">{{tag}}</h5>
       {% if not forloop.first %}
-      <form method="post" action="{% url 'tasque:tag_delete' tag.id %}">
+      <form method="post" action="{% url 'tasque:tag_delete' tag.id %}"  class="ml-auto">
         {% csrf_token %}
-      <button type="submit" class="btn btn-danger">削除</button>
+      <button type="submit" class="btn btn-outline-danger">削除</button>
       </form>
       {% endif %}
     </li>
