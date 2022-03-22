@@ -34,7 +34,7 @@ class Task(models.Model):
         verbose_name="ステータス", choices=TaskStatus.choices, default=0)
     tag = models.ForeignKey(
         TaskTag, verbose_name='タグ', default=1, on_delete=models.SET_DEFAULT)
-    due_date = models.DateField(verbose_name='期限', blank=True, null=True)
+    due_date = models.DateTimeField(verbose_name='期限', blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     finished_at = models.DateTimeField(
         verbose_name='完了日時', blank=True, null=True)
