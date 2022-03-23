@@ -1,22 +1,8 @@
 {% extends 'base.html' %} {% block content %}
-<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグでソートする</h2>
-{% for tag in all_tag %}
 
-<li class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2">
-  <h5 class="text-jade col-8 m-0">{{tag.name}}</h5>
-  <a href="{% url 'tasque:task_do' tag_id=tag.id %}" class="ml-auto">
-    {% if tag.id == now_tag.id %}
-    <button type="submit" class="btn btn-outline-secondary font-title">
-      選択中
-    </button>
-    {% else %}
-    <button type="submit" class="btn btn-outline-jade font-title">選択</button>
-    {% endif %}
-  </a>
-</li>
-
-{% endfor %}
-<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">次のタスク</h2>
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title" id="next-task">
+  次のタスク
+</h2>
 
 <div class="card">
   {% if tasks.0.due_date is not None %}
@@ -48,10 +34,28 @@
           </button>
         </form>
       </div>
-      {% else %}
-      <p class="card-text">このタグのTaskはありません</p>
-      {% endif %}
     </div>
+    {% else %}
+    <p class="card-text">このタグのTaskはありません</p>
+
+    {% endif %}
   </div>
 </div>
-{% endblock %}
+
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグでソートする</h2>
+{% for tag in all_tag %}
+
+<li class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2">
+  <h5 class="text-jade col-8 m-0">{{tag.name}}</h5>
+  <a href="{% url 'tasque:task_do' tag_id=tag.id %}" class="ml-auto">
+    {% if tag.id == now_tag.id %}
+    <button type="submit" class="btn btn-outline-secondary font-title">
+      選択中
+    </button>
+    {% else %}
+    <button type="submit" class="btn btn-outline-jade font-title">選択</button>
+    {% endif %}
+  </a>
+</li>
+
+{% endfor %} {% endblock %}
