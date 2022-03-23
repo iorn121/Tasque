@@ -1,31 +1,57 @@
 {% extends 'base.html' %} {% block content %}
-<h1>タグ</h1>
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグでソートする</h2>
 {% for tag in all_tag %}
-<a href="{% url 'tasque:task_do' tag_id=tag.id %}">
-  <p>{{ tag.name }}</p>
-</a>
+
+<li class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2">
+  <h5 class="text-jade col-8 m-0">{{tag.name}}</h5>
+  <a href="{% url 'tasque:task_do' tag_id=tag.id %}" class="ml-auto">
+    {% if tag.id == now_tag.id %}
+    <button type="submit" class="btn btn-outline-secondary font-title">
+      選択中
+    </button>
+    {% else %}
+    <button type="submit" class="btn btn-outline-jade font-title">選択</button>
+    {% endif %}
+  </a>
+</li>
+
 {% endfor %}
-<h1>最新タスク : {{now_tag.name}}</h1>
-{% if tasks %}
-<h2>{{tasks.0.title}}</h2>
-<h3>{{tasks.0.detail}}</h3>
-<h3>{{tasks.0.due_date}}</h3>
-<form method="post" action="{% url 'tasque:task_delete' tasks.0.id %}">
-  {% csrf_token %}
-  <button
-    class="btn"
-    type="submit"
-    name="delete"
-    onclick="return confirm('削除しますか？')"
-    )
-  >
-    削除
-  </button>
-</form>
-<form method="post" action="{% url 'tasque:task_done' tasks.0.id %}">
-  {% csrf_token %}
-  <button class="btn" type="submit" name="done">完了</button>
-</form>
-{% else %}
-<p>このタグのTaskはありません</p>
-{% endif %} {% endblock %}
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">次のタスク</h2>
+
+<div class="card">
+  {% if tasks.0.due_date is not None %}
+  <h5 class="text-right card-header">期限：{{tasks.0.due_date}}</h5>
+  {% endif %}
+  <div class="card-body">
+    {% if tasks %}
+    <h2 class="card-title text-d font-title">{{tasks.0.title}}</h2>
+    <p class="card-text">{{tasks.0.detail}}</p>
+    <div class="border-bottom"></div>
+    <div class="row justify-content-center mt-3">
+      <div class="btn-group">
+        <form method="post" action="{% url 'tasque:task_delete' tasks.0.id %}">
+          {% csrf_token %}
+          <button
+            class="btn btn-outline-danger mr-1"
+            type="submit"
+            name="delete"
+            onclick="return confirm('削除しますか？')"
+            )
+          >
+            削除
+          </button>
+        </form>
+        <form method="post" action="{% url 'tasque:task_done' tasks.0.id %}">
+          {% csrf_token %}
+          <button class="btn btn-secondary ml-1" type="submit" name="done">
+            完了
+          </button>
+        </form>
+      </div>
+      {% else %}
+      <p class="card-text">このタグのTaskはありません</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

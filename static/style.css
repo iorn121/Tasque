@@ -25,3 +25,26 @@ body {
   border-left-style: solid;
   border-left-color: #38b48b;
 }
+
+.btn-outline-jade {
+  color: #38b48b;
+  background-color: transparent;
+  border-color: #38b48b;
+}
+
+.btn-outline-jade:hover {
+  color: white;
+  background-color: #38b48b;
+  border-color: #38b48b;
+}
+
+.btn-outline-jade:focus,
+.btn-outline-jade.focus {
+  box-shadow: 0 0 0 0.2rem rgba(56, 180, 139, 0.5);
+}
+
+.btn-outline-jade.disabled,
+.btn-outline-jade:disabled {
+  color: #38b48b;
+  background-color: transparent;
+}
