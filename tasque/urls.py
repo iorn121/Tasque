@@ -14,6 +14,6 @@ urlpatterns = [
     path('tag/list/', views.TagListView, name='tag_list'),
     path('tag/create/', views.tagCreateView, name='tag_create'),
     path('tag/delete/<int:tag_id>/', views.tagDeleteView, name='tag_delete'),
-    path('tag/create/complete/', views.TagCreateCompleteView.as_view(),
-         name='tag_create_complete'),
+    #     path('tag/create/complete/', views.TagCreateCompleteView.as_view(),
+    #          name='tag_create_complete'),
 ]

@@ -11,7 +11,7 @@
       {% if not forloop.first %}
       <form method="post" action="{% url 'tasque:tag_delete' tag.id %}"  class="ml-auto">
         {% csrf_token %}
-      <button type="submit" class="btn btn-outline-danger">削除</button>
+      <button type="submit" class="btn btn-outline-danger font-title">削除</button>
       </form>
       {% endif %}
     </li>
@@ -21,7 +21,7 @@
   <form method="post" action="{% url 'tasque:tag_create' %}" class="m-1 p^2">
   {% csrf_token %}
   <input class="form-control" type="text" name="tag_name" placeholder="登録するタグを入力"></input>
-  <button type="submit" class="btn btn-secondary d-block mt-3 mx-auto">
+  <button type="submit" class="btn btn-secondary d-block mt-3 mx-auto font-title">
     追加
   </button>
 </form>

@@ -16,7 +16,7 @@ class IndexView(TemplateView):
 class TaskCreateView(CreateView):
     template_name = 'task_create.html'
     form_class = TaskForm
-    success_url = reverse_lazy('tasque:task_create_complete')
+    success_url = reverse_lazy('tasque:task_create')
 
 
 def TagListView(request):
@@ -31,8 +31,8 @@ class TaskCreateCompleteView(TemplateView):
     template_name = 'task_create_complete.html'
 
 
-class TagCreateCompleteView(TemplateView):
-    template_name = 'tag_create_complete.html'
+# class TagCreateCompleteView(TemplateView):
+#     template_name = 'tag_create_complete.html'
 
 
 def taskDoView(request, tag_id):

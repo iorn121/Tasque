@@ -1,8 +1,14 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Task Create Page</h1>
-<form method="post">
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タスク作成</h2>
+
+<form method="post" class="mt-5">
   {% csrf_token %}
-  <div class="container">{{form.as_p}}</div>
-  <button type="submit" class="btn btn-primary">投稿</button>
+  <div class="container form-group">{{form.as_p}}</div>
+  <button
+    type="submit"
+    class="btn btn-secondary d-block mt-5 mx-auto font-title"
+  >
+    投稿
+  </button>
 </form>
 {% endblock %}
