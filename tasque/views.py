@@ -16,6 +16,13 @@ class IndexView(TemplateView):
 class TaskCreateView(CreateView):
     template_name = 'task_create.html'
     form_class = TaskForm
+    model = Task
+
+    def form_valid(self, form):
+        object = form.save(commit=False)
+        object.user = self.request.user
+        object.save()
+        return super().form_valid(form)
     success_url = reverse_lazy('tasque:task_create_complete')
 
 

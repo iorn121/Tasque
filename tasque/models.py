@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 import uuid
 
 
@@ -6,6 +7,8 @@ class TaskTag(models.Model):
     class Meta:
         db_table = 'tag'
     name = models.CharField(max_length=100, verbose_name="タグ")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, to_field='username',
+                             verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
     # sort_order = models.PositiveSmallIntegerField(verbose_name="ソート順")
 
     def __int__(self):
@@ -27,6 +30,8 @@ class Task(models.Model):
         ordering = ['-created_at']
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, to_field='username',
+                             verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
     title = models.CharField(verbose_name='タスク名', max_length=100)
     detail = models.TextField(
         verbose_name='詳細', max_length=200, blank=True, null=True)

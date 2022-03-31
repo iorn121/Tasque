@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'tasque',
     'bootstrap4',
     'widget_tweaks',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'config.middleware.auth.authMiddleware',
+    # 'config.middleware.auth.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -114,6 +117,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_ERROR_URL = '/accounts/login'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/accounts/index/'
+
+AUTH_USER_MODEL = 'accounts.AuthUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
