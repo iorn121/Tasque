@@ -1,5 +1,6 @@
 from django import forms
 from .models import Task, TaskTag
+from django.db.models import Q
 
 
 class TaskForm(forms.ModelForm):
@@ -13,6 +14,12 @@ class TaskForm(forms.ModelForm):
             # 'due_date': forms.NumberInput(attrs={'type': 'date'}),
             'due_date': forms.DateTimeInput(attrs={"type": "datetime-local"})
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(TaskForm, self).__init__(*args, **kwargs)
+        self.fields['tag'].queryset = TaskTag.objects.filter(Q(user__isnull=True) |
+                                                             Q(user=user))
 
 
 class TagForm(forms.ModelForm):
