@@ -8,7 +8,7 @@
       class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2"
     >
       <h5 class="text-jade col-8 m-0">{{tag}}</h5>
-      {% if not forloop.first %}
+      {% if not tag.id == 1 %}
       <form method="post" action="{% url 'tasque:tag_delete' tag.id %}"  class="ml-auto">
         {% csrf_token %}
       <button type="submit" class="btn btn-outline-danger font-title">削除</button>
@@ -18,7 +18,7 @@
     {% endfor %}
   </ul>
   <h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグ登録</h2>
-  <form method="post" action="{% url 'tasque:tag_create' %}" class="m-1 p^2">
+  <form method="post" action="{% url 'tasque:tag_create' %}" class="m-1 p-2">
   {% csrf_token %}
   <input class="form-control" type="text" name="tag_name" placeholder="登録するタグを入力"></input>
   <button type="submit" class="btn btn-secondary d-block mt-3 mx-auto font-title">

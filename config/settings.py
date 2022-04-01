@@ -119,7 +119,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_ERROR_URL = '/accounts/login'
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/accounts/index/'
+LOGIN_REDIRECT_URL = 'tasque:index'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 AUTH_USER_MODEL = 'accounts.AuthUser'
 

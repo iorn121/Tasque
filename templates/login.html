@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-  </head>
-  <body>
-    <form action="/accounts/login/" method="post">
-      {% csrf_token %} {% if next %}
-      <input type="hidden" name="next" value="{{ next }}" />
-      {% endif %}
-      <input type="text" name="username" placeholder="ユーザID" />
-      <input type="password" name="password" placeholder="パスワード" />
-      <button type="submit" name="login">ログイン</button>
-    </form>
-  </body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">ログイン</h2>
+<p class="text-d mb-3">
+  ユーザー登録が済んでいない方は<a href="{% url 'accounts:signup' %}"
+    >ユーザー登録</a
+  >をしてください<br />登録済みの方はログインすることでアプリを使用できます
+</p>
+<form method="POST">
+  {% csrf_token %}
+  <input class="form-control" name="username" />
+  <br />
+
+  <input class="form-control" type="password" name="password" />
+  <br />
+
+  <button
+    class="btn btn-outline-jade font-title d-block mx-auto"
+    type="submit"
+    value="ログイン"
+  >
+    ログイン
+  </button>
+</form>
+
+{% endblock %}

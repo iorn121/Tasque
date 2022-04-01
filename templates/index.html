@@ -1,22 +1,22 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2 class="leftcolor-green mt-5 mb-3">
-  <a href="{% url 'tasque:tag_list' %}" class="text-b font-title">タグの設定</a>
-</h2>
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグの設定</h2>
 <p class="text-d">タスクを整理するためのタグを追加・削除します</p>
-<h2 class="leftcolor-green mt-5 mb-3">
-  <a href="{% url 'tasque:task_create' %}" class="text-b font-title"
-    >タスク作成</a
-  >
-</h2>
+<a href="{% url 'tasque:tag_list' %}">
+  <button class="btn btn-outline-jade font-title d-block mx-auto">移動</button>
+</a>
+<h2 class="leftcolor-green text-b font-title mt-5 mb-3">タスク作成</h2>
 <p class="text-d">
   新たにタスクを作成します<br />締切やタグを設定することでタスクの優先度を上げることができます
 </p>
-<h2 class="leftcolor-green mt-5 mb-3">
-  <a href="{% url 'tasque:task_do' tag_id=1 %}" class="text-b font-title"
-    >タスク実行</a
-  >
-</h2>
+<a href="{% url 'tasque:task_create' %}">
+  <button class="btn btn-outline-jade font-title d-block mx-auto">移動</button>
+</a>
+
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タスク実行</h2>
 <p class="text-d">タスクを一件ずつこなします</p>
+<a href="{% url 'tasque:task_do' tag_id=1 %}" class="text-b font-title">
+  <button class="btn btn-outline-jade font-title d-block mx-auto">移動</button>
+</a>
 
 {% endblock %}

@@ -2,17 +2,21 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DeleteView, DetailView
 from .forms import TaskForm, TagForm
-from django.db.models import F
+from django.db.models import F, Q
 from .models import Task, TaskTag
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 
 
 class IndexView(TemplateView):
     template_name = 'index.html'
 
 
+@method_decorator(login_required, name='dispatch')
 class TaskCreateView(CreateView):
     template_name = 'task_create.html'
     form_class = TaskForm
@@ -26,28 +30,33 @@ class TaskCreateView(CreateView):
     success_url = reverse_lazy('tasque:task_create_complete')
 
 
+@login_required
 def TagListView(request):
     template_name = 'tag_list.html'
+    user = request.user
     tag_list = {}
-    qs = TaskTag.objects.all()
+    qs = TaskTag.objects.filter(Q(user__isnull=True) | Q(user=user)).distinct()
     tag_list['tag_list'] = qs
     return render(request, template_name, tag_list)
 
 
-class TaskCreateCompleteView(TemplateView):
+@method_decorator(login_required, name='dispatch')
+class TaskCreateCompleteView(TemplateView, LoginRequiredMixin):
     template_name = 'task_create_complete.html'
 
 
 # class TagCreateCompleteView(TemplateView):
 #     template_name = 'tag_create_complete.html'
 
-
+@login_required
 def taskDoView(request, tag_id):
+    user = request.user
     template_name = 'task_do.html'
     todolist = {}
-    tg = TaskTag.objects.get(id=tag_id)
-    all_tag = TaskTag.objects.all()
-    qs = Task.objects.filter(tag=tg, status=0).order_by(
+    all_tag = TaskTag.objects.filter(
+        Q(user__isnull=True) | Q(user=user)).distinct()
+    tg = all_tag.get(id=tag_id)
+    qs = Task.objects.filter(user=user, tag=tg, status=0).order_by(
         F('due_date').asc(nulls_last=True))
     todolist['all_tag'] = all_tag
     todolist['now_tag'] = tg
@@ -58,8 +67,9 @@ def taskDoView(request, tag_id):
 @require_POST
 def tagCreateView(request):
     tag_name = request.POST['tag_name']
+
     if tag_name:
-        TaskTag.objects.create(name=tag_name)
+        TaskTag.objects.create(name=tag_name, user=request.user)
     return redirect('tasque:tag_list')
 
 
