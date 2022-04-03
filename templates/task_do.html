@@ -1,5 +1,22 @@
 {% extends 'base.html' %} {% block content %}
 
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグでソートする</h2>
+{% for tag in all_tag %}
+
+<li class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2">
+  <h5 class="text-jade col-8 m-0">{{tag.name}}</h5>
+  <a href="{% url 'tasque:task_do' tag_id=tag.id %}" class="ml-auto">
+    {% if tag.id == now_tag.id %}
+    <button type="submit" class="btn btn-outline-secondary font-title">
+      選択中
+    </button>
+    {% else %}
+    <button type="submit" class="btn btn-outline-jade font-title">選択</button>
+    {% endif %}
+  </a>
+</li>
+{% endfor %}
+
 <h2 class="leftcolor-green mt-5 mb-3 text-b font-title" id="next-task">
   次のタスク
 </h2>
@@ -18,15 +35,15 @@
         <form method="post" action="{% url 'tasque:task_delete' tasks.0.id %}">
           {% csrf_token %}
           <button
-            class="btn btn-outline-danger mr-1"
-            type="submit"
-            name="delete"
+          class="btn btn-outline-danger mr-1"
+          type="submit"
+          name="delete"
           >
-            削除
-          </button>
-        </form>
-        <form method="post" action="{% url 'tasque:task_done' tasks.0.id %}">
-          {% csrf_token %}
+          削除
+        </button>
+      </form>
+      <form method="post" action="{% url 'tasque:task_done' tasks.0.id %}">
+        {% csrf_token %}
           <button class="btn btn-secondary ml-1" type="submit" name="done">
             完了
           </button>
@@ -35,25 +52,19 @@
     </div>
     {% else %}
     <p class="card-text">このタグのTaskはありません</p>
-
+    
     {% endif %}
   </div>
 </div>
+<h2 class="leftcolor-green mt-5 mb-3 text-b font-title" id="next-task">
+  以降のタスク
+</h2>
+{% for task in tasks %}
 
-<h2 class="leftcolor-green mt-5 mb-3 text-b font-title">タグでソートする</h2>
-{% for tag in all_tag %}
-
+{% if not forloop.first %}
 <li class="list-group-item d-flex align-items-center list-unstyled row m-1 p-2">
-  <h5 class="text-jade col-8 m-0">{{tag.name}}</h5>
-  <a href="{% url 'tasque:task_do' tag_id=tag.id %}" class="ml-auto">
-    {% if tag.id == now_tag.id %}
-    <button type="submit" class="btn btn-outline-secondary font-title">
-      選択中
-    </button>
-    {% else %}
-    <button type="submit" class="btn btn-outline-jade font-title">選択</button>
-    {% endif %}
-  </a>
+  <h5 class="text-jade col-8 m-0">{{task.title}}</h5>
 </li>
-
-{% endfor %} {% endblock %}
+{% endif %}
+{% endfor %}
+{% endblock %}
