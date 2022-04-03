@@ -1,71 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-  {% load static %} {% bootstrap_css %}
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tasque</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
-  </head>
-  <body class="bg-light">
-    <h1 class="text-center m-5">
-      <a
-        href="{% url 'tasque:index' %}"
-        class="text-jade font-title text-uppercase fw-light"
-      >
-        Tasque
-      </a>
-    </h1>
-    {% if not user.is_anonymous %}
-    <h5 class="mt-3 mb-3 text-center text-secondary">
-      ようこそ {{user.username}} さん
-    </h5>
-    <h5 class="mt-3 mb-3 text-center">
-      <a href="{% url 'accounts:logout' %}" class="text-secondary font-title"
-        >ログアウト</a
-      >
-    </h5>
-    {% else %}
-    <h5 class="mt-3 mb-3 text-center">
-      <a href="{% url 'accounts:signup' %}" class="text-secondary font-title"
-        >ユーザー登録</a
-      >
-    </h5>
-    <h5 class="mt-3 mb-3 text-center">
-      <a href="{% url 'accounts:login' %}" class="text-secondary font-title"
-        >ログイン</a
-      >
-    </h5>
-    {% endif %}
+<html lang="ja">
+{% load static %} {% bootstrap_css %}
 
-    <div class="container">
-      <div class="border-bottom"></div>
-      {% block content %}{% endblock %}
-      <div class="border-bottom mt-5"></div>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasque</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
 
-    <h4 class="mt-5 text-center">
-      <a href="{% url 'tasque:index' %}" class="text-secondary font-title"
-        >TOP</a
-      >
-    </h4>
-    <h5 class="mt-1 text-center">
-      <a href="{% url 'tasque:tag_list' %}" class="text-secondary font-title"
-        >タグの設定</a
-      >
-    </h5>
-    <h5 class="mt-1 text-center">
-      <a href="{% url 'tasque:task_create' %}" class="text-secondary font-title"
-        >タスク作成</a
-      >
-    </h5>
-    <h5 class="mt-1 text-center">
-      <a
-        href="{% url 'tasque:task_do' tag_id=1  %}"
-        class="text-secondary font-title"
-        >タスク実行</a
-      >
-    </h5>
-  </body>
+<body class="bg-light">
+  <h1 class="text-center m-5">
+    <a href="{% url 'tasque:index' %}" class="text-jade font-title text-uppercase fw-light">
+      Tasque
+    </a>
+  </h1>
+  {% if not user.is_anonymous %}
+  <h5 class="mt-3 mb-3 text-center text-secondary">
+    ようこそ {{user.username}} さん
+  </h5>
+  <h5 class="mt-3 mb-3 text-center">
+    <a href="{% url 'accounts:logout' %}" class="text-secondary font-title">ログアウト</a>
+  </h5>
+  {% else %}
+  <h5 class="mt-3 mb-3 text-center">
+    <a href="{% url 'accounts:signup' %}" class="text-secondary font-title">ユーザー登録</a>
+  </h5>
+  <h5 class="mt-3 mb-3 text-center">
+    <a href="{% url 'accounts:login' %}" class="text-secondary font-title">ログイン</a>
+  </h5>
+  {% endif %}
+
+  <div class="container">
+    <div class="border-bottom"></div>
+    {% block content %}{% endblock %}
+    <div class="border-bottom mt-5"></div>
+  </div>
+
+  <h4 class="mt-5 text-center">
+    <a href="{% url 'tasque:index' %}" class="text-secondary font-title">TOP</a>
+  </h4>
+  <h5 class="mt-1 text-center">
+    <a href="{% url 'tasque:tag_list' %}" class="text-secondary font-title">タグの設定</a>
+  </h5>
+  <h5 class="mt-1 text-center">
+    <a href="{% url 'tasque:task_create' %}" class="text-secondary font-title">タスク作成</a>
+  </h5>
+  <h5 class="mt-1 text-center">
+    <a href="{% url 'tasque:task_do' tag_id=1  %}" class="text-secondary font-title">タスク実行</a>
+  </h5>
+</body>
+
 </html>
